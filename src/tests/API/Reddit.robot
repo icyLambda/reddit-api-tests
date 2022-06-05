@@ -29,12 +29,13 @@ Thread search
     ${thread_data_str}=     BuiltIn.Convert To String    ${thread_data}
 
     @{thread_subreddit}=    String.Get Regexp Matches    ${thread_data_str}
-    ...                                                  [\"\']subreddit[\"\']: [\"\']([\\w\\d\\s]*)[\"\']
+    ...                                                  [\"\']kind[\"\']: [\"\']t3[\"\'],[\\s\\w\\d\"\'\:\,\{]*[\"\']title[\"\']: [\"\']([\\w\\d\\s]*)[\"\'],
     ...                                                  1
 
-    BuiltIn.Should Be Equal                              ${thread_subreddit}[0]
+    BuiltIn.Should Contain                               ${thread_subreddit}[0]
     ...                                                  ${subreddit}
-    ...                                                  Текущий субреддит не равен ожидаемому
+    ...                                                  Текущая тема не содержит в себе ключ
+    ...                                                  ignore_case=True
 
     @{thread_id}=           String.Get Regexp Matches    ${thread_data_str}
     ...                                                  [\"\']name[\"\']: [\"\'](t3_[\\w\\d]*)[\"\']
