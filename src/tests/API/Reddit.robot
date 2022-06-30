@@ -29,7 +29,7 @@ Thread search
     ${thread_data_str}=     BuiltIn.Convert To String    ${thread_data}
 
     @{thread_subreddit}=    String.Get Regexp Matches    ${thread_data_str}
-    ...                                                  [\"\']kind[\"\']: [\"\']t3[\"\'],[\\s\\w\\d\"\'\:\,\{]*[\"\']title[\"\']: [\"\']([\\w\\d\\s]*)[\"\'],
+    ...                                                  [\"\']title[\"\']: [\"\']([\\w\\d\\s]*[\\D]*[\\w\\d\\s]*)[\"\'],
     ...                                                  1
 
     BuiltIn.Should Contain                               ${thread_subreddit}[0]
